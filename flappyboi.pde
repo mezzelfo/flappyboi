@@ -25,7 +25,6 @@ void draw()
     if (pillars.pillarList.peek().isSplatted(flappyboi))
     {
       flappyboi.alive = false;
-      
     }else flappyboi.score++;
     
     flappyboi.fall();

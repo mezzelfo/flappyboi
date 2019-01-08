@@ -43,7 +43,7 @@ abstract class Agent implements Comparable<Agent>
     return o.score - score;
   }
 
-  static final int inputN = 4;
+  static final int inputN = 6;
   static final int outputN = 2;
   float[][] hidden;
   
