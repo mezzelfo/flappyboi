@@ -1,6 +1,6 @@
 List<Bird> BirdPop;
 PillarManager pillars;
-int popsize = 200;
+int popsize = 50;
 int generation = 0;
 color yellow = color(255,200,0);
 color green = color(100,200,0);
@@ -40,19 +40,13 @@ void draw()
   for(Bird flappyboi : BirdPop) if (flappyboi.alive) vivi++;
   if(vivi == 0)
   {
-    //Collections.sort(BirdPop);
-    //for(Bird flappyboi : BirdPop) println("Morto. XP:",flappyboi.score);
-    //noLoop();
+    Collections.sort(BirdPop);
     generation++;
-    getNewGen(BirdPop,50);
-    println("Generation:",generation);
+    println("Generation:",generation,"\t Best Score: ",BirdPop.get(0).score);
+    
+    getNewGen(BirdPop,10);
     background(255);
     pillars = new PillarManager();
   }
   
-}
-
-void keyPressed()
-{
-  for(Bird flappyboi : BirdPop) flappyboi.flap();
 }

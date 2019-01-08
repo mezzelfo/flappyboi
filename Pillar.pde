@@ -29,6 +29,7 @@ class Pillar
 }
 class PillarManager
 {
+  int passed = 0;
   final int n = 5;
   LinkedList<Pillar> pillarList;
   PillarManager()
@@ -50,6 +51,7 @@ class PillarManager
     {
       pillarList.removeFirst();
       pillarList.addLast(new Pillar(pillarList.getLast().posx + random(300,450)));
+      passed++;
     }
   }
   

@@ -16,12 +16,10 @@ class Bird extends Agent
   float[] getInput()
   {
     return new float[] {
-      speed/-50,
-      posy/height,
-      pillars.pillarList.get(0).h/height,
-      pillars.pillarList.get(0).posx/width,
-      pillars.pillarList.get(1).h/height,
-      pillars.pillarList.get(1).posx/width
+      pillars.pillarList.get(0).posx - posx,        //Distance to the next pillar
+      speed,                                        //Bird velocity
+      height - pillars.pillarList.get(0).h - posy,   //Distance to the bottom pillar
+      height - pillars.pillarList.get(0).h - pillars.pillarList.get(0).a - posy
     };
   }
   
