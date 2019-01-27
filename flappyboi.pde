@@ -1,17 +1,19 @@
-Bird[] BirdPop;
 PillarManager pillars;
-final int[] BrainStruct = {4,5,2};
-int popsize = 20;
-int generation = 0;
+Population BirdPop;
+final int[] brainStruct = {4, 5, 2};
+final int popsize = 100;
+final int survivor = 10;
 color yellow = color(255,200,0);
 color green = color(100,200,0);
+
 void setup()
 {
   randomSeed(0);
   size(600,800);
-  BirdPop = new Bird[popsize];
+  BirdPop = new Population(popsize);
+  for(int i=0; i<BirdPop.pop.length; i++) BirdPop.pop[i] = new Bird(brainStruct);
   pillars = new PillarManager();
-  for(int i=0; i<popsize; i++) BirdPop[i] = new Bird(BrainStruct);
+  
 } 
 void draw()
 {
@@ -19,8 +21,9 @@ void draw()
   pillars.move();
   
   fill(yellow);
-  for(Bird flappyboi : BirdPop)
+  for(int i=0; i<BirdPop.pop.length; i++)
   {
+    Bird flappyboi = (Bird)BirdPop.pop[i];
     
     //Check collision with only the heading pillar
     if (pillars.pillarList.peek().isSplatted(flappyboi))
@@ -37,17 +40,10 @@ void draw()
   fill(green);
   pillars.display();
   
-  int vivi = 0;
-  for(Bird flappyboi : BirdPop) if (flappyboi.alive) vivi++;
-  if(vivi == 0)
+  if(BirdPop.isTimeToEvolve())
   {
-    Arrays.sort(BirdPop);
-    generation++;
-    println("Generation:",generation,"\t Best Score: ",BirdPop[0].score);
-    
-    getNewGen(BirdPop,5);
+    BirdPop.evolve(survivor);
     background(255);
-    pillars = new PillarManager();
+    pillars = new PillarManager(); 
   }
-  
 }
