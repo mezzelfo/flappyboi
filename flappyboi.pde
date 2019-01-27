@@ -1,6 +1,7 @@
-List<Bird> BirdPop;
+Bird[] BirdPop;
 PillarManager pillars;
-int popsize = 50;
+final int[] BrainStruct = {4,5,2};
+int popsize = 20;
 int generation = 0;
 color yellow = color(255,200,0);
 color green = color(100,200,0);
@@ -8,9 +9,9 @@ void setup()
 {
   randomSeed(0);
   size(600,800);
-  BirdPop = new ArrayList<Bird>(popsize);
+  BirdPop = new Bird[popsize];
   pillars = new PillarManager();
-  for(int i=0; i<popsize; i++) BirdPop.add(new Bird());
+  for(int i=0; i<popsize; i++) BirdPop[i] = new Bird(BrainStruct);
 } 
 void draw()
 {
@@ -40,11 +41,11 @@ void draw()
   for(Bird flappyboi : BirdPop) if (flappyboi.alive) vivi++;
   if(vivi == 0)
   {
-    Collections.sort(BirdPop);
+    Arrays.sort(BirdPop);
     generation++;
-    println("Generation:",generation,"\t Best Score: ",BirdPop.get(0).score);
+    println("Generation:",generation,"\t Best Score: ",BirdPop[0].score);
     
-    getNewGen(BirdPop,10);
+    getNewGen(BirdPop,5);
     background(255);
     pillars = new PillarManager();
   }
