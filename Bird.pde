@@ -11,7 +11,6 @@ class Bird extends Agent
     reset();
   }
   
-  
   @Override
   float[] getInput()
   {
